@@ -2,36 +2,34 @@
 #define CPP_MODULE08_MUTANSTACK_HPP
 
 #include <stack>
+#include <algorithm>
 #include <iostream>
 #include <iterator>
+#include <deque>
 
 
 template <typename T>
 class MutantStack : public std::stack<T> {
 
 	public:
-		typedef typename std::stack<T>::container_type::iterator iterator;
-		typedef std::stack<T>::container_type c;
+		typedef typename std::deque<T>::iterator iterator;
+		MutantStack() : std::stack<T>() {};
+		MutantStack(MutantStack const &src) {
+			*this = src;
+		}
+		virtual ~MutantStack() {};
+
+		MutantStack &operator=(MutantStack const &rhs)  {
+			std::stack<T>::operator=(rhs);
+			return *this;
+		}
+
 		iterator begin() {
-			return std::begin(c);
+			return this->c.begin();
 		}
 		iterator end() {
-			return std::begin(c);
+			return this->c.end();
 		}
-//		T *begin() {
-//			return &this->top() - this->size();
-//		};
-//		T *end() {
-//			return &this->top();
-//		}
-//	class iterator : public std::iterator<
-//						std::input_iterator_tag,
-//						int,
-//						long,
-//						const T*> {
-//
-//		};
-
 };
 
 #endif
