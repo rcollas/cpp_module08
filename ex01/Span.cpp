@@ -18,8 +18,15 @@ Span::Span(Span const &src) {
 
 Span &Span::operator=(const Span &rhs) {
 
-	this->_array = rhs._array;
 	this->_sizeMax = rhs._sizeMax;
+	this->_pos = rhs._pos;
+	if (this->_array) {
+		delete [] this->_array;
+	}
+	this->_array = new int[rhs._sizeMax];
+	for (unsigned int i = 0; i < rhs._sizeMax; i++) {
+		this->_array[i] = rhs._array[i];
+	}
 	return *this;
 }
 
@@ -109,8 +116,7 @@ int findMin(int array[], int start, int end) {
 			min = right;
 		}
 	}
-	int ans = min;
-	return ans;
+	return min;
 }
 
 int findMax(int array[], int start, int end) {
@@ -135,8 +141,7 @@ int findMax(int array[], int start, int end) {
 			max = left;
 		}
 	}
-	int ans = max;
-	return ans;
+	return max;
 }
 
 void Span::addRange(std::vector<int>::iterator begin,

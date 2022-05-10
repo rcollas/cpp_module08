@@ -40,6 +40,9 @@ int main() {
 		range.push_back(4);
 		range.push_back(5);
 		Span foo(10);
+		Span test;
+		Span copy(10);
+		test = copy;
 
 		std::vector<int>::iterator begin = range.begin();
 		std::vector<int>::iterator end = range.end();
